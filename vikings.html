@@ -1,0 +1,111 @@
+<link rel="stylesheet" href="https://unpkg.com/d3-milestones/build/d3-milestones.css">
+<script src="https://unpkg.com/d3-milestones/build/d3-milestones.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<select id="sageCRMid"  data-dropdown></select>
+  <div class="timeline" style="width: 800px;"></div>
+
+<script>
+  const books = [
+  {"SageCRMid": "100036899", "ActivityID": "00T6T00006DeqeD", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100067703", "ActivityID": "00T6T00006Der9L", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100067703", "ActivityID": "00T6T00006DerHK", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "20497", "ActivityID": "00T6T00006DerIv", "LastModifiedDate": "07/11/2021"},
+  {"SageCRMid": "100067703", "ActivityID": "00T6T00006DeqqS", "LastModifiedDate": "07/12/2021"},
+  {"SageCRMid": "100067703", "ActivityID": "00T6T00006DereN", "LastModifiedDate": "08/10/2021"},
+  {"SageCRMid": "27196", "ActivityID": "00T6T00006DerDm", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "39657", "ActivityID": "00T6T00006Derz6", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "86281", "ActivityID": "00T6T00006Des0O", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100008722", "ActivityID": "00T6T00006DerlU", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100049536", "ActivityID": "00T6T00006Des5V", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "4373", "ActivityID": "00T6T00006DesXo", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100067718", "ActivityID": "00T6T00006DesuW", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "79217", "ActivityID": "00T6T00006DesGR", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "4422", "ActivityID": "00T6T00006Desxa", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "2455", "ActivityID": "00T6T00006Det7h", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100054315", "ActivityID": "00T6T00006Det86", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "3172", "ActivityID": "00T6T00006DetHA", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100058546", "ActivityID": "00T6T00006DetII", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100060528", "ActivityID": "00T6T00006DetLW", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "40510", "ActivityID": "00T6T00006DetJp", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "9948", "ActivityID": "00T6T00006DetgH", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100052394", "ActivityID": "00T6T00006DetHa", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100052394", "ActivityID": "00T6T00006DetHb", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "67530", "ActivityID": "00T6T00006Detlg", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "1055", "ActivityID": "00T6T00006DetwG", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "79171", "ActivityID": "00T6T00006Dettg", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "2455", "ActivityID": "00T6T00006Deu4w", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "79171", "ActivityID": "00T6T00006Detth", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "2554", "ActivityID": "00T6T00006DetnO", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "28367", "ActivityID": "00T6T00006DeuHD", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "79171", "ActivityID": "00T6T00006DeuJr", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "79171", "ActivityID": "00T6T00006DeuJs", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "3992", "ActivityID": "00T6T00006DetUU", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100054617", "ActivityID": "00T6T00006DeuWW", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100061690", "ActivityID": "00T6T00006DethX", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100067371", "ActivityID": "00T6T00006Deubr", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100067371", "ActivityID": "00T6T00006DeuXQ", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "60520", "ActivityID": "00T6T00006DeucC", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100068107", "ActivityID": "00T6T00006Deug4", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100054617", "ActivityID": "00T6T00006Deuid", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "3231", "ActivityID": "00T6T00006DeujC", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "3582", "ActivityID": "00T6T00006Deup9", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "36138", "ActivityID": "00T6T00006DeuoH", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "3582", "ActivityID": "00T6T00006Dev5p", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100041462", "ActivityID": "00T6T00006DevEn", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "100061690", "ActivityID": "00T6T00006DevFM", "LastModifiedDate": "07/10/2021"},
+  {"SageCRMid": "3582", "ActivityID": "00T6T00006DevKp", "LastModifiedDate": "07/10/2021"}
+  ]
+
+function displayAllSageCRMID() {
+  // Declare a new array
+  let newArray = [];
+
+  // Declare an empty object
+  let uniqueData = {};
+
+  // Loop for the array elements
+  for (let i in books) {
+    // Extract the title
+    let sageCRMid = books[i]['SageCRMid'];
+    // Use the title as the index
+    uniqueData[sageCRMid] = books[i];
+  }
+
+  // Loop to push unique object into array
+  for (i in uniqueData) {
+    newArray.push(uniqueData[i]);
+  }
+
+  // Display the unique objects
+  
+  let option = "";
+  for (let i = 0; i < newArray.length; i++) {
+    option += `<option value="${newArray[i].SageCRMid}">${newArray[i].SageCRMid}</option>`
+  }
+  document.getElementById("sageCRMid").innerHTML = option;
+}
+
+$(document).ready(function () {
+    displayAllSageCRMID();
+    loadTimeLineGraph($('#sageCRMid').val());
+});
+
+$('#sageCRMid').on('change', function () {
+  loadTimeLineGraph(this.value);
+});
+
+function loadTimeLineGraph(sageCRMid){
+  let objSageCRM = books.filter(data => data.SageCRMid === sageCRMid);
+  // console.log(newdd);
+  milestones('.timeline')
+  .mapping({
+    'timestamp': 'LastModifiedDate',
+      'text': 'SageCRMid'  
+  })
+  .parseTime('%x')
+  .aggregateBy('day')
+  .render([objSageCRM]);
+}
+</script>
+
+
